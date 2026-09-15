@@ -9,6 +9,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  .payment-card{
+    max-width:560px;
+    margin:2rem auto 0;
+    padding:1.5rem 1.75rem;
+    border-radius:14px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.15);
+    color:inherit;
+  }
+  .payment-card .order-label{display:block;margin-bottom:0.75rem;}
+  .payment-details p{margin:0.35rem 0;font-size:0.98rem;}
+  .payment-details strong{opacity:0.85;}
+  .copy-btn{
+    margin-left:0.5rem;
+    padding:0.15rem 0.6rem;
+    font-size:0.8rem;
+    border-radius:6px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:transparent;
+    color:inherit;
+    cursor:pointer;
+  }
+  .copy-btn:hover{background:rgba(255,255,255,0.12);}
+  .payment-card .order-note{margin-top:1rem;font-size:0.9rem;}
+  .payment-card .order-note a{color:inherit;text-decoration:underline;}
+</style>
 </head>
 <body>
 
@@ -201,6 +228,21 @@
       <span class="order-value">Tshelimnyama, Nqaba Road</span>
     </div>
   </div>
+
+  <div class="payment-card">
+    <span class="order-label">Pay via EFT</span>
+    <div class="payment-details">
+      <p><strong>Bank:</strong> Capitec</p>
+      <p><strong>Account Name:</strong> Spikili Grills (M H Dladla)</p>
+      <p><strong>Account Type:</strong> Business</p>
+      <p><strong>Account Number:</strong> <span id="acctNum">2597560801</span>
+        <button type="button" class="copy-btn" onclick="copyAcctNumber()">Copy</button>
+      </p>
+      <p><strong>Branch Code:</strong> 470010</p>
+    </div>
+    <p class="order-note">Paid by EFT? Send your proof of payment on <a href="https://wa.me/27790573676?text=Hi%20Spikili's!%20Here's%20my%20proof%20of%20payment..." target="_blank" rel="noopener">WhatsApp</a> so we can confirm and start your order.</p>
+  </div>
+
   <p class="order-note">Open Daily &middot; Fast Service &middot; Freshly Prepared</p>
   <p class="order-note">Delivery available on orders of 3 items or more</p>
 </section>
@@ -224,6 +266,16 @@
       toggle.classList.remove('open');
     });
   });
+
+  function copyAcctNumber() {
+    const num = document.getElementById('acctNum').textContent.trim();
+    navigator.clipboard.writeText(num).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  }
 </script>
 
 </body>
